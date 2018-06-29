@@ -1,0 +1,67 @@
+table {
+    border: solid #A9A9A9;
+    border-bottom-width: 3px;
+    border-collapse: collapse;
+}
+
+tbody {
+    border: #A9A9A9;
+    border-bottom-width: 3px;
+    border-collapse: collapse;
+}
+
+.resultTable {
+    padding-top: 20px;
+}
+
+.filterTable tbody tr {
+    border-bottom: dotted #A9A9A9;
+    border-bottom-width: 3px;
+    border-collapse: collapse;
+}
+
+.resultTable tr {
+    border: solid #A9A9A9;
+    border-bottom-width: 3px;
+    border-collapse: collapse;
+
+}
+
+.resultTable td {
+    border: solid #A9A9A9;
+    border-bottom-width: 3px;
+    border-collapse: collapse;
+}
+
+.headLine {
+    color: #463F3F;
+    border-bottom: 1px solid #463F3F;
+}
+
+thead {
+    background-color: #A9A9A9;
+}
+
+.filterButton {
+    position: absolute;
+    color: white;
+    background-color: #696969;
+}
+
+.divButton {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.btn-link {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    color: #463F3F;
+    padding: 0;
+    border-bottom: 1px solid #463F3F;
+    font-family: inherit;
+    font-size: inherit;
+}

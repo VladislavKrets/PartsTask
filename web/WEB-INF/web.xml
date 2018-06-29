@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <display-name>Test</display-name>
+    <servlet>
+        <servlet-name>partsServlet</servlet-name>
+        <servlet-class>com.test.task.servlets.PartsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>partsServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <mime-mapping>
+        <extension>css</extension>
+        <mime-type>text/css</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>js</extension>
+        <mime-type>text/javascript</mime-type>
+    </mime-mapping>
+</web-app>
