@@ -18,11 +18,19 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Created by lollipop on 28.06.2018.
+ * It is the main part of application
+ * Servlet gets data from jsp page and sends data to jsp page
  */
 public class PartsServlet extends HttpServlet {
     final static Logger logger = LogManager.getLogger(PartsServlet.class);
 
+    /**
+     * get method opens page
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.debug("Entering doGet() method");
@@ -30,11 +38,18 @@ public class PartsServlet extends HttpServlet {
         req.getRequestDispatcher("WEB-INF/pages/PartsFilter.jsp").forward(req, resp);
     }
 
+    /**
+     * handling post methods
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.debug("Entering doPost() method");
         String action = req.getParameter("action");
-
+        //if actions will be added in the future
         switch (action) {
             case "buildFilter":
                 logger.debug("catched buildFuilter action");
@@ -46,6 +61,10 @@ public class PartsServlet extends HttpServlet {
         req.getRequestDispatcher("WEB-INF/pages/PartsFilter.jsp").forward(req, resp);
     }
 
+    /**
+     * This method gets data from db and sends it to HttpServletRequest
+     * @param req from doPost()
+     */
     private void buildFilterHandler(HttpServletRequest req) {
         Filter filter = buildFilter(req);
         PostgresqlDaoImpl postgresqlDao = new PostgresqlDaoImpl();
@@ -53,19 +72,30 @@ public class PartsServlet extends HttpServlet {
         req.setAttribute("parts", partEntities);
     }
 
+    /**
+     * this methods builds filter using data from jsp page
+     * @param req fron doPost()
+     * @return filter
+     */
     private Filter buildFilter(HttpServletRequest req) {
         Filter filter = new Filter();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
-        filter.setPN(req.getParameter("PN"));
-        filter.setPartName(req.getParameter("PartName"));
-        filter.setVendor(req.getParameter("Vendor"));
+        filter.setPN((req.getParameter("PN") == null
+                || req.getParameter("PN").isEmpty())
+                ? null : req.getParameter("PN"));
+        filter.setPartName((req.getParameter("PartName") == null
+                || req.getParameter("PartName").isEmpty())
+                ? null : req.getParameter("PartName"));
+        filter.setVendor((req.getParameter("Vendow") == null
+                || req.getParameter("Vendor").isEmpty())
+                ? null : req.getParameter("Vendor"));
         filter.setQty((req.getParameter("QTY") == null
                 || req.getParameter("QTY").isEmpty()
-                || !req.getParameter("QTY").matches("\\d+")) ? null
+                || !req.getParameter("QTY").matches("\\d+")) ? null //checking by regex is current string a number
                 : Integer.parseInt(req.getParameter("QTY")));
         try {
             if (req.getParameter("afterShipped") != null && req.getParameter("afterShipped")
-                    .matches("[A-Z][a-z]{2} \\d\\d?, \\d{4}"))
+                    .matches("[A-Z][a-z]{2} \\d\\d?, \\d{4}")) //this regex allows us to check by pattern MMM dd, yyyy
                 filter.setShippedAfter(dateFormat.parse(req.getParameter("afterShipped")));
             if (req.getParameter("beforeShipped") != null && req.getParameter("beforeShipped")
                     .matches("[A-Z][a-z]{2} \\d\\d?, \\d{4}"))
@@ -83,6 +113,9 @@ public class PartsServlet extends HttpServlet {
         return filter;
     }
 
+    /**
+     * closing all connections
+     */
     @Override
     public void destroy() {
         try {

@@ -264,8 +264,9 @@ function ReceivedOnClick() {
     }
 }
 function compareDates(date1, date2) {
+    //calculating the difference between dates
     var difference = Date.parse(date1.textContent, 'MMM dd, yyyy') - Date.parse(date2.textContent, 'MMM dd, yyyy');
-    if(difference < 0) return -1;
+    if(difference < 0) return -1; //for comparing
     else if(difference > 0) return 1;
     else return 0;
 }

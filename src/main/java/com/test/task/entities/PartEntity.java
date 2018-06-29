@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by lollipop on 28.06.2018.
+ * This class is entity of a part
  */
 public class PartEntity {
     private String PN;

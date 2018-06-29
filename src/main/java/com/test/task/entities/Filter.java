@@ -3,7 +3,7 @@ package com.test.task.entities;
 import java.util.Date;
 
 /**
- * Created by lollipop on 28.06.2018.
+ * This class is entity of filter
  */
 public class Filter {
     private String PN;
